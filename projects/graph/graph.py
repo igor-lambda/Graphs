@@ -65,25 +65,24 @@ class Graph:
                 print(v)
             # Add to visited
             visited.add(v)
-            # If neighbor not visited, push to stack. 
+            # If neighbor not visited, push to stack.
             for n in self.get_neighbors(v):
                 if n not in visited:
                     stack.push(n)
 
     def dft_recurse(self, vert, visited):
-        visited.add(vert)
-        print(vert)
-        for i in self.vertices:
-            dft_recurse(i, visited)
-
+        visited.add(vert)  # we add visited vert to visited list
+        print(vert)  # We print vert
+        # For a tree, we check left first, but we iterate through all neighbors here
+        for i in self.get_neighbors(vert):
+            if i not in visited: # Stop infinite loops
+                self.dft_recurse(i, visited) # Call on 
 
     def dft_recursive(self, starting_vertex):
-        visited = set()
+        visited = set()  # If we don't check in recursive func if visited, we can get infinite loop
 
+        # We call our recursive func here
         self.dft_recurse(starting_vertex, visited)
-
-
-
 
     def bfs(self, starting_vertex, destination_vertex):
         """
